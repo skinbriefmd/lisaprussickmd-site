@@ -272,7 +272,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--ice);color:var(--text);mi
 
 <div class="hero">
   <h1>Skin <em>Lineup</em></h1>
-  <p class="hero-sub">Enter your skincare products in any order. Dermatologist-designed rules reorder them correctly and flag what shouldn't be combined.</p>
+  <p class="hero-sub">Enter your skincare products in any order — type a brand name (e.g. Cetaphil), a full product name (e.g. CeraVe Hydrating Cleanser), or just an ingredient (e.g. retinol, vitamin C serum). Dermatologist-designed rules reorder them correctly and flag what shouldn't be combined.</p>
   <p class="hero-gate-note">Try one routine free, morning or night. Want to check both? Enter your email to unlock unlimited checks.</p>
 </div>
 
@@ -387,7 +387,7 @@ function addRow(val=''){
   const list=document.getElementById('product-list');
   const div=document.createElement('div');
   div.className='product-row';div.id='row-'+id;
-  div.innerHTML=`<input type="text" autocomplete="off" placeholder="e.g. adapalene, vitamin C serum, SPF..." id="inp-${id}"/><div class="ac-list" id="ac-${id}"></div><button class="rm-btn" onclick="removeRow(${id})">&#215;</button>`;
+  div.innerHTML=`<input type="text" autocomplete="off" placeholder="e.g. Cetaphil, CeraVe moisturizer, retinol..." id="inp-${id}"/><div class="ac-list" id="ac-${id}"></div><button class="rm-btn" onclick="removeRow(${id})">&#215;</button>`;
   list.appendChild(div);
   const inp=document.getElementById('inp-'+id);
   if(val) inp.value=val;
@@ -823,6 +823,11 @@ function saveAsImage(){
 }
 
 addRow();addRow();
+
+function toggleTSBMenu(){
+  const m=document.getElementById('tsb-mobile-menu');
+  if(m) m.classList.toggle('open');
+}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
