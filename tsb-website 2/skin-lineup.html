@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Skin Lineup — The Skin Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SKIN LINEUP — The Skin Brief
+   PLACEHOLDER SLOTS:
+   1. KIT EMAIL API:  search KIT_PLACEHOLDER
+   2. CLAUDE API URL: search API_PLACEHOLDER
+   ============================================================ */
+:root{
+  --ice:#EEF5FD;--navy:#030c3f;--yellow:#FEF284;--yellow-dk:#e6d94a;
+  --text:#1a2a4a;--muted:#5a6a8a;--border:rgba(3,12,63,0.09);--white:#ffffff;
+  --stop-bg:#FFF0F0;--stop-b:#E57373;--stop-t:#7A1A1A;
+  --warn-bg:#FFF8ED;--warn-b:#F5A623;--warn-t:#7A4F00;
+  --ok-bg:#F0FAF4;--ok-b:#66BB6A;--ok-t:#1B5E20;
+  --preg-bg:#FDF0F7;--preg-b:#CE93D8;--preg-t:#6A1B4D;
+  --tip-bg:#EEF5FD;--tip-b:#B8C8F0;--tip-t:#030c3f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--ice);color:var(--text);min-height:100vh;}
+
+
+
+
+
+.hero{padding:2.5rem 1.25rem 1.25rem;max-width:700px;margin:0 auto;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,6vw,3.6rem);color:var(--navy);line-height:1.05;letter-spacing:-.01em;margin-bottom:.65rem;}
+.hero h1 em{font-style:italic;color:var(--muted);}
+.hero-sub{font-size:15px;color:var(--muted);max-width:460px;line-height:1.65;margin-bottom:.5rem;}
+.hero-gate-note{font-size:13px;color:var(--muted);font-style:italic;opacity:.75;max-width:440px;line-height:1.6;}
+
+.main{max-width:700px;margin:0 auto;padding:1.25rem 1.25rem 2rem;}
+
+.tabs{display:flex;gap:6px;margin-bottom:1.1rem;}
+.tab{padding:7px 20px;font-family:'DM Sans',sans-serif;font-size:13px;border-radius:100px;border:1px solid rgba(3,12,63,.16);background:transparent;cursor:pointer;color:var(--muted);transition:all .15s;}
+.tab.am{background:var(--navy);color:var(--yellow);border-color:var(--navy);font-weight:500;}
+.tab.pm{background:var(--navy);color:#B8C8F0;border-color:var(--navy);font-weight:500;}
+
+.input-card{background:var(--white);border-radius:18px;border:1px solid var(--border);padding:1.4rem;margin-bottom:1rem;}
+.card-label{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);opacity:.6;margin-bottom:.9rem;}
+.product-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;position:relative;}
+.product-row input{flex:1;font-family:'DM Sans',sans-serif;font-size:15px;padding:11px 14px;border-radius:10px;border:1px solid rgba(3,12,63,.11);background:var(--ice);color:var(--navy);outline:none;transition:all .15s;-webkit-appearance:none;}
+.product-row input:focus{border-color:rgba(3,12,63,.3);background:var(--white);}
+.product-row input::placeholder{color:rgba(90,106,138,.4);}
+.rm-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--muted);font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;}
+.rm-btn:hover{background:var(--stop-bg);color:#c0392b;}
+
+.ac-list{position:absolute;top:calc(100% + 4px);left:0;right:40px;background:var(--white);border:1px solid rgba(3,12,63,.1);border-radius:12px;overflow:hidden;z-index:100;box-shadow:0 6px 24px rgba(3,12,63,.08);display:none;}
+.ac-list.show{display:block;}
+.ac-item{padding:10px 14px;font-size:13px;cursor:pointer;border-bottom:1px solid rgba(3,12,63,.04);display:flex;flex-direction:column;gap:2px;transition:background .1s;}
+.ac-item:last-child{border-bottom:none;}
+.ac-item:hover,.ac-item.hi{background:var(--ice);}
+.ac-name{color:var(--navy);font-weight:500;font-size:13px;}
+.ac-detail{color:var(--muted);font-size:11px;}
+
+.add-btn{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);background:transparent;border:none;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:6px;margin-top:4px;transition:color .15s;}
+.add-btn:hover{color:var(--navy);}
+.actions{display:flex;gap:10px;margin-top:1.1rem;}
+.btn{flex:1;padding:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:12px;border:1px solid rgba(3,12,63,.13);background:transparent;cursor:pointer;color:var(--navy);transition:all .15s;}
+.btn:hover{background:var(--ice);}
+.btn.go-am{background:var(--yellow);color:var(--navy);border-color:var(--yellow);}
+.btn.go-am:hover{background:var(--yellow-dk);}
+.btn.go-pm{background:var(--navy);color:#B8C8F0;border-color:var(--navy);}
+.btn.go-pm:hover{opacity:.88;}
+
+.gate{background:var(--white);border-radius:18px;border:1px solid var(--border);padding:2rem 1.5rem;margin-top:1.25rem;text-align:center;display:none;}
+.gate-icon{width:48px;height:48px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+.gate h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--navy);margin-bottom:.4rem;}
+.gate-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;max-width:320px;margin-left:auto;margin-right:auto;}
+.gate-form{display:flex;gap:8px;max-width:400px;margin:0 auto;flex-wrap:wrap;}
+.gate-form input{flex:1;min-width:200px;font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid rgba(3,12,63,.14);background:var(--ice);color:var(--navy);outline:none;-webkit-appearance:none;}
+.gate-form input:focus{border-color:rgba(3,12,63,.3);background:var(--white);}
+.gate-submit{padding:11px 20px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:10px;background:var(--navy);color:var(--yellow);border:none;cursor:pointer;white-space:nowrap;transition:opacity .15s;}
+.gate-submit:hover{opacity:.88;}
+.gate-note{font-size:11px;color:var(--muted);opacity:.55;margin-top:.75rem;}
+
+.results{margin-top:1.4rem;}
+.session-note{font-size:13px;color:var(--muted);margin-bottom:1.1rem;padding:.8rem 1rem;background:var(--white);border-radius:12px;border-left:3px solid var(--yellow);line-height:1.6;}
+.sec-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(90,106,138,.45);margin-bottom:8px;}
+.step-card{background:var(--white);border-radius:14px;border:1px solid var(--border);padding:.9rem 1.1rem;margin-bottom:7px;display:flex;align-items:flex-start;gap:12px;transition:border-color .15s;}
+.step-card:hover{border-color:rgba(3,12,63,.15);}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--yellow);font-size:11px;font-weight:500;color:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-body{flex:1;min-width:0;}
+.step-top{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:3px;}
+.step-name{font-size:14px;font-weight:500;color:var(--navy);}
+.step-tag{font-size:10px;font-weight:400;padding:2px 8px;border-radius:100px;letter-spacing:.03em;white-space:nowrap;}
+.t-clean{background:#F1EFE8;color:#5a5346;}
+.t-tone{background:#EEEDFE;color:#3C3489;}
+.t-ser{background:#E6F1FB;color:#0C447C;}
+.t-act{background:#FFF8ED;color:#7A4F00;}
+.t-moist{background:#E1F5EE;color:#085041;}
+.t-spf{background:#FCEBEB;color:#791F1F;}
+.t-oil{background:#F1EFE8;color:#5a5346;}
+.step-why{font-size:12px;color:var(--muted);line-height:1.55;}
+.removed-note{font-size:12px;color:var(--stop-t);font-style:italic;margin-top:6px;padding:.5rem .75rem;background:var(--stop-bg);border-radius:8px;border:1px solid var(--stop-b);}
+
+.flag{border-radius:13px;padding:.9rem 1.1rem;margin-bottom:7px;display:flex;gap:11px;align-items:flex-start;}
+.f-stop{background:var(--stop-bg);border:1px solid var(--stop-b);}
+.f-warn{background:var(--warn-bg);border:1px solid var(--warn-b);}
+.f-ok{background:var(--ok-bg);border:1px solid var(--ok-b);}
+.f-preg{background:var(--preg-bg);border:1px solid var(--preg-b);}
+.f-tip{background:var(--tip-bg);border:1px solid var(--tip-b);}
+.f-icon{font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px;width:16px;text-align:center;}
+.f-stop .f-icon,.f-stop .f-title{color:var(--stop-t);}
+.f-warn .f-icon,.f-warn .f-title{color:var(--warn-t);}
+.f-ok .f-icon,.f-ok .f-title{color:var(--ok-t);}
+.f-preg .f-icon,.f-preg .f-title{color:var(--preg-t);}
+.f-tip .f-icon,.f-tip .f-title{color:var(--tip-t);}
+.f-title{font-size:13px;font-weight:500;margin:0 0 2px;}
+.f-desc{font-size:12px;margin:0;line-height:1.6;}
+.f-stop .f-desc{color:#a02020;}
+.f-warn .f-desc{color:#6b4200;}
+.f-ok .f-desc{color:#2e7d32;}
+.f-preg .f-desc{color:#7b1f6a;}
+.f-tip .f-desc{color:var(--muted);}
+
+.layer-guide{margin-bottom:1.25rem;}
+.layer-toggle{width:100%;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--navy);transition:all .15s;}
+.layer-toggle:hover{border-color:rgba(3,12,63,.18);}
+.layer-arrow{font-size:11px;color:var(--muted);transition:transform .2s;display:inline-block;}
+.layer-arrow.open{transform:rotate(180deg);}
+.layer-content{display:none;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;padding:1rem 1.1rem;}
+.layer-content.show{display:block;}
+.layer-rule{margin-bottom:.9rem;padding-bottom:.9rem;border-bottom:1px solid var(--border);}
+.layer-rule:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.layer-rule-title{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:3px;}
+.layer-rule-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* SHARE */
+.share-section{margin-top:1.25rem;}
+.share-btn{width:100%;padding:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:12px;border:1.5px solid var(--navy);background:transparent;cursor:pointer;color:var(--navy);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;}
+.share-btn:hover{background:var(--navy);color:var(--yellow);}
+.share-preview{margin-top:10px;display:none;}
+.share-preview.show{display:block;}
+.share-card-wrap{border-radius:16px;overflow:hidden;position:relative;background:#89c4e1;aspect-ratio:9/16;max-height:500px;}
+.share-card-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:16px;}
+.share-overlay{position:absolute;top:0;left:0;right:0;bottom:0;padding:5% 7%;}
+.share-session-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#1a2a4a;opacity:.65;margin-bottom:.5rem;margin-top:46%;}
+.share-products{display:flex;flex-direction:column;gap:6px;}
+.share-product-row{display:flex;align-items:center;gap:8px;}
+.share-product-num{width:22px;height:22px;border-radius:50%;background:#030c3f;font-size:10px;font-weight:500;color:#FEF284;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.share-product-name{font-size:12px;font-weight:500;color:#030c3f;line-height:1.3;}
+.share-actions{display:flex;gap:8px;margin-top:10px;}
+.share-action-btn{flex:1;padding:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border-radius:10px;border:1px solid var(--border);background:var(--white);cursor:pointer;color:var(--navy);transition:all .15s;}
+.share-action-btn:hover{background:var(--navy);color:var(--yellow);}
+
+/* SCROLL HINT — Skin Spend style */
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;padding:1.75rem 0;width:100%;}
+.scroll-hint-text{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--navy);}
+.scroll-hint-circle{
+  width:32px;height:52px;border-radius:100px;
+  border:1.5px solid var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--navy);
+  flex-shrink:0;
+}
+
+.cta-block{background:var(--white);border-radius:14px;border:1px solid var(--border);padding:1.1rem 1.25rem;margin-top:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.cta-text p:first-child{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:2px;}
+.cta-text p:last-child{font-size:12px;color:var(--muted);}
+.cta-follow{padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border-radius:100px;background:var(--navy);color:var(--yellow);border:none;cursor:pointer;white-space:nowrap;text-decoration:none;transition:opacity .15s;display:inline-block;}
+.cta-follow:hover{opacity:.85;}
+
+.disclaimer{font-size:11px;color:rgba(90,106,138,.45);margin-top:1.5rem;line-height:1.7;border-top:1px solid var(--border);padding-top:1rem;}
+.disclaimer a{color:rgba(90,106,138,.6);text-decoration:underline;}
+.powered{font-size:11px;color:rgba(90,106,138,.4);text-align:right;margin-top:.4rem;font-style:italic;}
+
+.how{background:var(--navy);padding:3rem 1.25rem;margin-top:0;}
+.how-inner{max-width:700px;margin:0 auto;}
+.how h2{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,4vw,2rem);color:var(--yellow);margin-bottom:2rem;}
+.how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;}
+.how-step{background:rgba(255,255,255,.05);border:1px solid rgba(184,200,240,.15);border-radius:14px;padding:1.1rem 1.2rem;}
+.how-num{width:28px;height:28px;border-radius:50%;background:var(--yellow);color:var(--navy);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;}
+.how-title{font-size:13px;font-weight:500;color:var(--yellow);margin-bottom:.3rem;}
+.how-desc{font-size:12px;color:rgba(200,208,245,.55);line-height:1.55;}
+
+.footer{background:var(--navy);padding:1.25rem;}
+.footer-inner{max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;font-size:12px;color:rgba(200,208,245,.5);text-align:center;}
+.footer-inner strong{color:var(--yellow);font-family:'DM Serif Display',serif;font-weight:400;font-size:13px;}
+.footer-links{max-width:700px;margin:.75rem auto 0;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{font-size:11px;color:rgba(200,208,245,.4);text-decoration:none;}
+.footer-links a:hover{color:rgba(200,208,245,.7);}
+
+#export-canvas{display:none;}
+
+@media(max-width:480px){
+  
+  .hero{padding:2rem 1rem 1rem;}
+  .main{padding:1rem 1rem 2rem;}
+  .how{padding:2rem 1rem 2.5rem;}
+  .how-steps{grid-template-columns:1fr;gap:.75rem;}
+  .gate-form{flex-direction:column;}
+  .gate-form input{min-width:0;width:100%;}
+  .gate-submit{width:100%;}
+  .cta-block{flex-direction:column;align-items:flex-start;}
+  .actions{flex-direction:column;}
+  .actions .btn{flex:none;width:100%;}
+  .share-actions{flex-direction:column;}
+}
+
+/* TSB NAV */
+.tsb-nav{background:#FFFFFF;border-bottom:1px solid #D8E2F0;padding:0 48px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.tsb-nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#1A2A3D;text-decoration:none;}
+.tsb-nav-links{display:flex;gap:20px;align-items:center;}
+.tsb-nav-links a{font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:#3D5068;font-weight:500;text-decoration:none;transition:color 0.2s;}
+.tsb-nav-links a:hover,.tsb-nav-links a.active{color:#1A2A3D;}
+.tsb-nav-divider{width:1px;height:14px;background:#D8E2F0;}
+.tsb-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.tsb-hamburger span{width:22px;height:2px;background:#1A2A3D;border-radius:2px;display:block;}
+.tsb-mobile-menu{display:none;background:#FFFFFF;border-bottom:1px solid #D8E2F0;padding:16px 24px;flex-direction:column;gap:16px;}
+.tsb-mobile-menu a{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#3D5068;font-weight:500;text-decoration:none;}
+.tsb-mobile-menu.open{display:flex;}
+/* TSB FOOTER */
+.tsb-footer{background:#FFFFFF;border-top:1px solid #D8E2F0;padding:28px 48px;margin-top:0;}
+.tsb-footer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #D8E2F0;}
+.tsb-footer-logo{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#2E3F54;font-weight:500;}
+.tsb-si-wrap{display:flex;gap:10px;}
+.tsb-si{width:32px;height:32px;border-radius:50%;background:#F2F4FB;border:1px solid #D8E2F0;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color 0.2s;}
+.tsb-si:hover{border-color:#B8C8F0;}
+.tsb-si svg{width:14px;height:14px;fill:#2E3F54;}
+.tsb-footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.tsb-footer-col-wrap{display:flex;gap:48px;flex-wrap:wrap;}
+.tsb-footer-col h4{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#2E3F54;font-weight:600;margin-bottom:10px;}
+.tsb-footer-col a{display:block;font-size:11px;color:#3D5068;text-decoration:none;margin-bottom:6px;transition:color 0.2s;}
+.tsb-footer-col a:hover{color:#1A2A3D;}
+.tsb-footer-copy{font-size:10px;color:#3D5068;align-self:flex-end;}
+@media(max-width:768px){
+  .tsb-nav{padding:0 20px;}
+  .tsb-nav-links{display:none;}
+  .tsb-hamburger{display:flex;}
+  .tsb-footer{padding:20px;}
+  .tsb-footer-top{flex-direction:column;gap:14px;align-items:flex-start;}
+  .tsb-footer-bottom{flex-direction:column;}
+  .tsb-footer-col-wrap{flex-wrap:wrap;gap:20px;}
+}
+
+</style>
+</head>
+<body>
+
+<nav class="tsb-nav">
+  <a href="index.html" class="tsb-nav-logo">The Skin Brief</a>
+  <div class="tsb-nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skin-lineup.html" class="active">Skin Lineup</a>
+    <a href="blog.html">Blog</a>
+    <a href="quiz.html">Skin Quiz</a>
+    <a href="kids.html">Kids</a>
+    <div class="tsb-nav-divider"></div>
+    <a href="https://skinbriefmd.substack.com" target="_blank">Newsletter</a>
+    <a href="https://instagram.com/skinbriefmd" target="_blank">Instagram</a>
+  </div>
+  <button class="tsb-hamburger" onclick="toggleTSBMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="tsb-mobile-menu" id="tsb-mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="skin-lineup.html">Skin Lineup</a>
+  <a href="blog.html">Blog</a>
+  <a href="quiz.html">Skin Quiz</a>
+  <a href="kids.html">Kids</a>
+  <a href="https://skinbriefmd.substack.com" target="_blank">Newsletter</a>
+  <a href="https://instagram.com/skinbriefmd" target="_blank">Instagram</a>
+</div>
+
+<div class="hero">
+  <h1>Skin <em>Lineup</em></h1>
+  <p class="hero-sub">Enter your skincare products in any order. Dermatologist-designed rules reorder them correctly and flag what shouldn't be combined.</p>
+  <p class="hero-gate-note">Try one routine free, morning or night. Want to check both? Enter your email to unlock unlimited checks.</p>
+</div>
+
+<div class="main">
+  <div class="tabs">
+    <button class="tab am" id="tab-am" onclick="switchTab('am')">Morning</button>
+    <button class="tab" id="tab-pm" onclick="switchTab('pm')">Night</button>
+  </div>
+
+  <div class="input-card">
+    <div class="card-label">Your products</div>
+    <div id="product-list"></div>
+    <button class="add-btn" onclick="addRow()">
+      <span style="width:20px;height:20px;border-radius:50%;background:var(--navy);color:var(--yellow);display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;flex-shrink:0;">+</span>
+      Add another product
+    </button>
+    <div class="actions">
+      <button class="btn" onclick="clearAll()">Clear</button>
+      <button class="btn go-am" id="go-btn" onclick="handleCheck()">Check my routine &rarr;</button>
+    </div>
+  </div>
+
+  <div class="gate" id="gate">
+    <div class="gate-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h3>Unlock unlimited routines</h3>
+    <p class="gate-sub">Enter your email to check as many routines as you want.</p>
+    <div class="gate-form">
+      <input type="email" id="gate-email" placeholder="your@email.com" />
+      <!-- KIT_PLACEHOLDER: wire to Kit API then call runCheck() -->
+      <button class="gate-submit" onclick="unlockWithEmail()">Unlock &rarr;</button>
+    </div>
+    <p class="gate-note">By continuing you agree to our <a href="/privacy-policy" style="color:var(--muted);">privacy policy</a>.</p>
+  </div>
+
+  <div id="results"></div>
+
+  <div id="scroll-hint-wrap" class="scroll-hint" onclick="document.getElementById('how-section').scrollIntoView({behavior:'smooth'})">
+    <span class="scroll-hint-text">How it works</span>
+    <div class="scroll-hint-circle">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="7" y1="1" x2="7" y2="15"></line>
+        <polyline points="2 10 7 16 12 10"></polyline>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="how" id="how-section">
+  <div class="how-inner">
+    <h2>How to layer skincare for maximum results</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div class="how-title">Enter your products</div>
+        <div class="how-desc">Type anything in any order — cleansers, actives, SPF, whatever's on your shelf.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div class="how-title">Get your lineup</div>
+        <div class="how-desc">Derm-designed rules instantly reorder your routine into the correct sequence.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div class="how-title">Check for conflicts</div>
+        <div class="how-desc">See which products clash and what to do instead.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-inner">
+    <strong>skin lineup</strong>
+    <span>·</span>
+    <span>by the skin brief</span>
+    <span>·</span>
+    <span>skincare, uncomplicated.</span>
+  </div>
+  <div class="footer-links">
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms and Conditions</a>
+  </div>
+</div>
+
+<canvas id="export-canvas"></canvas>
+
+<script>
+const PRODUCTS=[
+  {name:"CeraVe Hydrating Cleanser",detail:"gentle, non-foaming · cleanser",cat:"cleanser"},
+  {name:"CeraVe Foaming Cleanser",detail:"normal to oily skin · cleanser",cat:"cleanser"},
+  {name:"CeraVe Moisturizing Cream",detail:"ceramides, hyaluronic acid · moisturizer",cat:"moisturizer"},
+  {name:"CeraVe PM Facial Moisturizing Lotion",detail:"niacinamide, ceramides · moisturizer",cat:"moisturizer"},
+  {name:"La Roche-Posay Toleriane Cleanser",detail:"sensitive skin · cleanser",cat:"cleanser"},
+  {name:"La Roche-Posay Cicaplast Baume B5",detail:"barrier repair · moisturizer",cat:"moisturizer"},
+  {name:"La Roche-Posay Anthelios SPF 50",detail:"broad spectrum · sunscreen",cat:"spf"},
+  {name:"EltaMD UV Clear SPF 46",detail:"niacinamide, zinc · sunscreen",cat:"spf"},
+  {name:"EltaMD UV Daily SPF 40",detail:"hyaluronic acid · sunscreen",cat:"spf"},
+  {name:"The Ordinary Niacinamide 10%",detail:"pore minimizing, brightening · serum",cat:"serum"},
+  {name:"The Ordinary Glycolic Acid 7% Toning Solution",detail:"AHA exfoliant · active",cat:"active"},
+  {name:"The Ordinary Retinol 0.5%",detail:"PM only · active",cat:"retinol"},
+  {name:"The Ordinary Retinol 1%",detail:"PM only, stronger · active",cat:"retinol"},
+  {name:"The Ordinary Hyaluronic Acid 2% + B5",detail:"hydration · serum",cat:"serum"},
+  {name:"The Ordinary AHA 30% + BHA 2% Peeling Solution",detail:"weekly exfoliant · active",cat:"active"},
+  {name:"The Ordinary Salicylic Acid 2%",detail:"BHA, acne-prone skin · active",cat:"active"},
+  {name:"Paula's Choice BHA 2% Liquid Exfoliant",detail:"salicylic acid · active",cat:"active"},
+  {name:"Paula's Choice 10% Niacinamide Booster",detail:"brightening · serum",cat:"serum"},
+  {name:"SkinCeuticals CE Ferulic",detail:"Vitamin C 15%, antioxidant · serum",cat:"vitc"},
+  {name:"SkinCeuticals Triple Lipid Restore",detail:"ceramides, cholesterol · moisturizer",cat:"moisturizer"},
+  {name:"SkinCeuticals Hydrating B5 Gel",detail:"hyaluronic acid · serum",cat:"serum"},
+  {name:"Drunk Elephant T.L.C. Framboos Glycolic Night Serum",detail:"AHA/BHA blend · active",cat:"active"},
+  {name:"Drunk Elephant Protini Polypeptide Cream",detail:"peptides · moisturizer",cat:"moisturizer"},
+  {name:"Drunk Elephant Lala Retro Whipped Cream",detail:"ceramides · moisturizer",cat:"moisturizer"},
+  {name:"Tatcha The Water Cream",detail:"oil-free · moisturizer",cat:"moisturizer"},
+  {name:"Tatcha The Rice Wash",detail:"softening cleanser · cleanser",cat:"cleanser"},
+  {name:"Dr. Idriss Hyper Serum",detail:"hyperpigmentation, niacinamide · serum",cat:"serum"},
+  {name:"Dr. Idriss Night Shift Retinol",detail:"retinol, PM only · active",cat:"retinol"},
+  {name:"Differin Adapalene Gel 0.1%",detail:"retinoid, PM only · active",cat:"retinoid"},
+  {name:"Neutrogena Rapid Wrinkle Repair Retinol",detail:"retinol · active",cat:"retinol"},
+  {name:"Neutrogena Hydro Boost Water Gel",detail:"hyaluronic acid · moisturizer",cat:"moisturizer"},
+  {name:"Neutrogena Ultra Sheer SPF 100",detail:"chemical sunscreen · sunscreen",cat:"spf"},
+  {name:"Olay Regenerist Retinol 24 Serum",detail:"retinol, niacinamide · active",cat:"retinol"},
+  {name:"DHC Deep Cleansing Oil",detail:"makeup remover, first cleanse · cleansing oil",cat:"cleanser"},
+  {name:"Banila Co Clean It Zero",detail:"cleansing balm, first cleanse · cleanser",cat:"cleanser"},
+  {name:"Heimish All Clean Balm",detail:"cleansing balm, first cleanse · cleanser",cat:"cleanser"},
+  {name:"Kose Softymo Speedy Cleansing Oil",detail:"Japanese cleansing oil · cleanser",cat:"cleanser"},
+  {name:"GlowRecipe Watermelon Glow Niacinamide Dew Drops",detail:"niacinamide, hyaluronic acid · serum",cat:"serum"},
+  {name:"Vitamin C serum",detail:"antioxidant, brightening · serum",cat:"vitc"},
+  {name:"Retinol serum",detail:"PM only · active",cat:"retinol"},
+  {name:"Retinol cream",detail:"PM only · active",cat:"retinol"},
+  {name:"Tretinoin",detail:"prescription retinoid, PM only · active",cat:"retinoid"},
+  {name:"Adapalene",detail:"synthetic retinoid, PM only · active",cat:"retinoid"},
+  {name:"Tazarotene",detail:"prescription retinoid, PM only · active",cat:"retinoid"},
+  {name:"Trifarotene",detail:"prescription retinoid, PM only · active",cat:"retinoid"},
+  {name:"Niacinamide serum",detail:"brightening, barrier support · serum",cat:"serum"},
+  {name:"Hyaluronic acid serum",detail:"humectant · serum",cat:"serum"},
+  {name:"Peptide serum",detail:"anti-aging · serum",cat:"serum"},
+  {name:"Copper peptide serum",detail:"anti-aging, barrier repair · serum",cat:"copper"},
+  {name:"Azelaic acid",detail:"rosacea, hyperpigmentation · active",cat:"active"},
+  {name:"Benzoyl peroxide wash",detail:"acne · cleanser",cat:"bpo"},
+  {name:"Clindamycin gel",detail:"antibiotic, acne · active",cat:"active"},
+  {name:"Centella toner",detail:"soothing, anti-inflammatory · toner",cat:"toner"},
+  {name:"Rose water toner",detail:"hydrating · toner",cat:"toner"},
+  {name:"Facial oil",detail:"sealing step · oil",cat:"oil"},
+  {name:"Rosehip oil",detail:"vitamins A, C · oil",cat:"oil"},
+  {name:"Squalane oil",detail:"lightweight, barrier · oil",cat:"oil"},
+  {name:"Eye cream",detail:"targeted treatment · eye cream",cat:"eyecream"},
+  {name:"SPF",detail:"broad spectrum sunscreen",cat:"spf"},
+  {name:"Sunscreen",detail:"broad spectrum",cat:"spf"},
+  {name:"Moisturizer",detail:"hydration, barrier",cat:"moisturizer"},
+  {name:"Cleanser",detail:"first step",cat:"cleanser"},
+];
+
+const catOrder={cleanser:1,toner:2,vitc:3,active:4,retinol:4,retinoid:4,copper:4,bpo:4,serum:5,eyecream:6,moisturizer:7,oil:8,spf:9};
+const tagMap={cleanser:["t-clean","cleanser"],toner:["t-tone","toner"],vitc:["t-ser","serum"],serum:["t-ser","serum"],active:["t-act","active"],retinol:["t-act","active"],retinoid:["t-act","active"],copper:["t-ser","serum"],bpo:["t-clean","cleanser"],moisturizer:["t-moist","moisturizer"],oil:["t-oil","facial oil"],spf:["t-spf","sunscreen"],eyecream:["t-moist","eye cream"]};
+
+const LS_FREE='sl_free_used';
+const LS_UNLOCK='sl_unlocked';
+function isUnlocked(){return localStorage.getItem(LS_UNLOCK)==='true';}
+function freeUsed(){return localStorage.getItem(LS_FREE)==='true';}
+function markFree(){localStorage.setItem(LS_FREE,'true');}
+function markUnlocked(){localStorage.setItem(LS_UNLOCK,'true');localStorage.setItem(LS_FREE,'true');}
+
+let rows=[],rowId=0,tab='am',activeAC=null,pendingProducts=[],currentResults=null;
+
+function switchTab(t){
+  tab=t;
+  document.getElementById('tab-am').className='tab'+(t==='am'?' am':'');
+  document.getElementById('tab-pm').className='tab'+(t==='pm'?' pm':'');
+  document.getElementById('go-btn').className='btn '+(t==='am'?'go-am':'go-pm');
+  document.getElementById('results').innerHTML='';
+  document.getElementById('gate').style.display='none';
+  currentResults=null;
+  document.getElementById('how-section').style.display='block';
+  document.getElementById('scroll-hint-wrap').style.display='flex';
+  // Clear inputs and start fresh
+  rows=[];
+  document.getElementById('product-list').innerHTML='';
+  addRow();addRow();
+}
+
+function addRow(val=''){
+  const id=++rowId;rows.push(id);
+  const list=document.getElementById('product-list');
+  const div=document.createElement('div');
+  div.className='product-row';div.id='row-'+id;
+  div.innerHTML=`<input type="text" autocomplete="off" placeholder="e.g. adapalene, vitamin C serum, SPF..." id="inp-${id}"/><div class="ac-list" id="ac-${id}"></div><button class="rm-btn" onclick="removeRow(${id})">&#215;</button>`;
+  list.appendChild(div);
+  const inp=document.getElementById('inp-'+id);
+  if(val) inp.value=val;
+  inp.addEventListener('input',()=>handleInput(id));
+  inp.addEventListener('keydown',e=>handleKey(e,id));
+  inp.addEventListener('blur',()=>setTimeout(()=>hideAC(id),200));
+  if(!val) inp.focus();
+}
+
+function handleInput(id){
+  const v=document.getElementById('inp-'+id).value.trim().toLowerCase();
+  const ac=document.getElementById('ac-'+id);
+  if(v.length<2){ac.classList.remove('show');ac.innerHTML='';return;}
+  const m=PRODUCTS.filter(p=>p.name.toLowerCase().includes(v)).slice(0,5);
+  if(!m.length){ac.classList.remove('show');return;}
+  ac.innerHTML=m.map((p,i)=>`<div class="ac-item" id="ac-${id}-${i}" data-name="${p.name.replace(/"/g,'&quot;')}" onmousedown="selectAC(${id},this)"><span class="ac-name">${hl(p.name,v)}</span><span class="ac-detail">${p.detail}</span></div>`).join('');
+  ac.classList.add('show');activeAC={id,idx:-1,max:m.length};
+}
+
+function hl(s,q){const i=s.toLowerCase().indexOf(q);if(i<0)return s;return s.slice(0,i)+'<strong>'+s.slice(i,i+q.length)+'</strong>'+s.slice(i+q.length);}
+
+function handleKey(e,id){
+  const ac=document.getElementById('ac-'+id);
+  if(!ac.classList.contains('show')||!activeAC||activeAC.id!==id)return;
+  if(e.key==='ArrowDown'){e.preventDefault();activeAC.idx=Math.min(activeAC.idx+1,activeAC.max-1);updAC(id);}
+  else if(e.key==='ArrowUp'){e.preventDefault();activeAC.idx=Math.max(activeAC.idx-1,-1);updAC(id);}
+  else if(e.key==='Enter'&&activeAC.idx>=0){e.preventDefault();const el=document.getElementById(`ac-${id}-${activeAC.idx}`);if(el)selectAC(id,el);}
+  else if(e.key==='Escape')hideAC(id);
+}
+function updAC(id){document.getElementById('ac-'+id).querySelectorAll('.ac-item').forEach((el,i)=>el.classList.toggle('hi',i===activeAC.idx));}
+function selectAC(id,el){document.getElementById('inp-'+id).value=el.getAttribute('data-name');hideAC(id);}
+function hideAC(id){const ac=document.getElementById('ac-'+id);if(ac){ac.classList.remove('show');ac.innerHTML='';}}
+function removeRow(id){rows=rows.filter(r=>r!==id);document.getElementById('row-'+id)?.remove();if(rows.length===0)addRow();}
+
+function clearAll(){
+  rows=[];
+  document.getElementById('product-list').innerHTML='';
+  document.getElementById('results').innerHTML='';
+  document.getElementById('gate').style.display='none';
+  currentResults=null;
+  document.getElementById('how-section').style.display='block';
+  document.getElementById('scroll-hint-wrap').style.display='flex';
+  addRow();addRow();
+}
+
+function getProducts(){return rows.map(id=>{const el=document.getElementById('inp-'+id);return el?el.value.trim():'';}).filter(Boolean);}
+
+function handleCheck(){
+  const products=getProducts();
+  if(!products.length){document.getElementById('results').innerHTML='<p style="font-size:14px;color:var(--muted);padding:.5rem 0">Add at least one product to check.</p>';return;}
+  pendingProducts=products;
+  if(isUnlocked()){runCheck();}
+  else if(!freeUsed()){markFree();runCheck();}
+  else{document.getElementById('gate').style.display='block';document.getElementById('gate').scrollIntoView({behavior:'smooth',block:'start'});}
+}
+
+function unlockWithEmail(){
+  const email=document.getElementById('gate-email').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('gate-email').style.borderColor='var(--stop-b)';return;}
+  // KIT_PLACEHOLDER: POST email to Kit API
+  markUnlocked();
+  document.getElementById('gate').style.display='none';
+  runCheck();
+}
+
+function detectCat(name){
+  const n=name.toLowerCase();
+  if(/cleansing oil|cleansing balm|clean it zero|softymo|heimish|dhc deep|makeup remover/.test(n)) return 'cleanser';
+  if(/cleanser|foaming|wash\b|micellar|cleanse/.test(n)) return 'cleanser';
+  if(/toner|essence/.test(n)) return 'toner';
+  if(/adapalene|tazarotene|trifarotene|tretinoin|retinoic acid/.test(n)) return 'retinoid';
+  if(/retinol|retinal\b|retinaldehyde/.test(n)) return 'retinol';
+  if(/vitamin c|ascorbic|ferulic|ce ferulic/.test(n)) return 'vitc';
+  if(/glycolic|aha\b|lactic acid|peeling solution|salicylic|bha\b|exfoliant/.test(n)) return 'active';
+  if(/azelaic|clindamycin/.test(n)) return 'active';
+  if(/benzoyl/.test(n)) return 'bpo';
+  if(/copper peptide/.test(n)) return 'copper';
+  if(/niacinamide|hyaluronic|peptide|serum|booster/.test(n)) return 'serum';
+  if(/eye cream|eye/.test(n)) return 'eyecream';
+  if(/\boil\b|rosehip|squalane|marula/.test(n)) return 'oil';
+  if(/spf|sunscreen|sunblock|\buv\b/.test(n)) return 'spf';
+  if(/moistur|cream|lotion|gel\b|baume|balm/.test(n)) return 'moisturizer';
+  const match=PRODUCTS.find(p=>p.name.toLowerCase()===n);
+  if(match) return match.cat;
+  return 'serum';
+}
+
+function getWhy(cat,name,sess){
+  const n=name.toLowerCase();
+  if(cat==='cleanser') return 'First step always — removes buildup and preps skin for what follows.';
+  if(cat==='toner') return 'Applied after cleansing to balance pH and prime skin for actives.';
+  if(cat==='vitc') return 'Vitamin C goes on before heavier layers and is most effective in the AM as an antioxidant shield.';
+  if(/glycolic|aha|lactic/.test(n)) return 'AHA exfoliants need direct contact with clean skin before any occlusive layer to work at the right pH.';
+  if(/salicylic|bha/.test(n)) return 'BHA penetrates into pores and is applied before serums and moisturizer for maximum efficacy.';
+  if(cat==='active') return 'Actives are applied before hydrating serums and moisturizer to maximize absorption.';
+  if(cat==='retinol') return 'Apply retinol after serums on dry skin. PM use only — allow serums to fully absorb first.';
+  if(cat==='retinoid') return 'Apply retinoid after serums on dry skin. PM use only — allow serums to fully absorb first.';
+  if(cat==='bpo') return 'Benzoyl peroxide goes on clean skin before other products.';
+  if(cat==='copper') return 'Copper peptides go on after water-based serums and away from Vitamin C and acids.';
+  if(/hyaluronic/.test(n)) return 'Apply to slightly damp skin after actives to pull moisture into the skin barrier.';
+  if(cat==='serum') return 'Water-based serums go on after actives and before moisturizer, thinnest to thickest.';
+  if(cat==='eyecream') return 'Pat gently around the eye area after serums and before moisturizer.';
+  if(cat==='moisturizer') return 'Seals in all previous layers. Use a heavier formula at night for barrier repair.';
+  if(cat==='oil') return 'Oils are occlusive and always go last before SPF, or as the final step at night.';
+  if(cat==='spf') return sess==='am'?'SPF goes last in the morning. Every time. Nothing goes on top of it.':'SPF is a morning step — swap for a richer moisturizer or treatment at night.';
+  return 'Layer in order of texture, thinnest to thickest, for best absorption.';
+}
+
+function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):'';}
+
+function renderAIResults(result, sess) {
+  const sessLabel = sess === 'am' ? 'morning' : 'night';
+  const tagMap2 = {
+    cleanser:["t-clean","cleanser"], toner:["t-tone","toner"],
+    serum:["t-ser","serum"], active:["t-act","active"],
+    moisturizer:["t-moist","moisturizer"], oil:["t-oil","facial oil"],
+    spf:["t-spf","sunscreen"], "eye-cream":["t-moist","eye cream"]
+  };
+  const flagMap = {stop:'f-stop', warn:'f-warn', ok:'f-ok', preg:'f-preg', tip:'f-tip'};
+  const iconMap = {stop:'✕', warn:'!', ok:'✓', preg:'!', tip:'i'};
+
+  let html = '';
+  if (result.session_notes) {
+    html += `<p class="session-note">${result.session_notes}</p>`;
+  } else {
+    html += `<p class="session-note">Reordered into the correct derm-designed sequence for your ${sessLabel} routine.</p>`;
+  }
+
+  html += `<div style="margin-bottom:1.1rem"><div class="sec-label">Correct order</div>`;
+  (result.ordered || []).forEach((item, i) => {
+    const [tc, tl] = tagMap2[item.category] || ['t-act','active'];
+    html += `<div class="step-card"><div class="step-num">${i+1}</div><div class="step-body"><div class="step-top"><span class="step-name">${item.name}</span><span class="step-tag ${tc}">${tl}</span></div><p class="step-why">${item.why}</p></div></div>`;
+  });
+  (result.removed || []).forEach(r => {
+    html += `<div class="removed-note">${r.name} removed from order — ${r.reason}. See conflict check below.</div>`;
+  });
+  html += '</div>';
+
+  const nonTipConflicts = (result.conflicts || []).filter(c => c.severity !== 'tip' && c.severity !== 'preg');
+  const pregConflict = (result.conflicts || []).find(c => c.severity === 'preg');
+  const tipConflict = (result.conflicts || []).find(c => c.severity === 'tip');
+
+  if (nonTipConflicts.length) {
+    html += `<div style="margin-bottom:1.1rem"><div class="sec-label">Conflict check</div>`;
+    nonTipConflicts.forEach(c => {
+      const cls = flagMap[c.severity] || 'f-warn';
+      const icon = iconMap[c.severity] || '!';
+      html += `<div class="flag ${cls}"><div class="f-icon">${icon}</div><div><p class="f-title">${c.title}</p><p class="f-desc">${c.desc}</p></div></div>`;
+    });
+    html += '</div>';
+  }
+
+  if (tipConflict) {
+    html += `<div style="margin-bottom:1.1rem"><div class="sec-label">Derm tip</div>`;
+    html += `<div class="flag f-tip"><div class="f-icon">i</div><div><p class="f-title">${tipConflict.title}</p><p class="f-desc">${tipConflict.desc}</p></div></div>`;
+    html += '</div>';
+  }
+
+  if (pregConflict) {
+    html += `<div style="margin-bottom:1.1rem">`;
+    html += `<div class="flag f-preg"><div class="f-icon">!</div><div><p class="f-title">${pregConflict.title}</p><p class="f-desc">${pregConflict.desc}</p></div></div>`;
+    html += '</div>';
+  }
+
+  // Store for share card
+  currentResults = {ordered: result.ordered || [], conflicts: result.conflicts || [], sess, retinoidTerm: '', hasAnyRetinoid: false, removedNames: result.removed || []};
+
+  html += renderBottomSection(result.ordered || [], sess, sessLabel);
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('how-section').style.display='none';
+  document.getElementById('scroll-hint-wrap').style.display='none';
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderBottomSection(ordered, sess, sessLabel) {
+  let html = '';
+  html += `<div class="layer-guide"><button class="layer-toggle" onclick="toggleLayer()"><span>How to layer skincare for maximum results</span><span class="layer-arrow" id="layer-arrow">&#9660;</span></button><div class="layer-content" id="layer-content">
+    <div class="layer-rule"><div class="layer-rule-title">Thinnest to thickest</div><div class="layer-rule-desc">Always apply products in order of consistency — watery toners and serums first, then creams, then oils. Heavier products seal in everything underneath. If you reverse the order, lighter products cannot penetrate.</div></div>
+    <div class="layer-rule"><div class="layer-rule-title">SPF is always last</div><div class="layer-rule-desc">In the morning, sunscreen is the final step. Nothing goes on top of it. Applying moisturizer or makeup on top of SPF dilutes the protection.</div></div>
+  </div></div>`;
+
+  html += `<div class="share-section">
+    <button class="share-btn" onclick="toggleSharePreview()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Share my lineup
+    </button>
+    <div class="share-preview" id="share-preview">
+      <div class="share-card-wrap" id="share-card-wrap">
+        <img src="skinelineupcard2.png" alt="" class="share-card-img" onerror="this.style.display='none'">
+        <div class="share-overlay">
+          <div class="share-session-label">${sessLabel} routine</div>
+          <div class="share-products">
+            ${ordered.slice(0,7).map((item,i)=>`<div class="share-product-row"><div class="share-product-num">${i+1}</div><span class="share-product-name">${item.name}</span></div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="share-actions">
+        <button class="share-action-btn" onclick="saveAsImage()">Save as image</button>
+        <button class="share-action-btn" onclick="doCopy()">Copy text</button>
+      </div>
+    </div>
+  </div>`;
+
+  html += `<div class="cta-block"><div class="cta-text"><p>Enjoyed this? Follow for more skincare tips.</p><p>@skinbriefmd</p></div><a class="cta-follow" href="https://instagram.com/skinbriefmd" target="_blank">Follow on Instagram</a></div>`;
+  html += `<div class="disclaimer">For educational purposes only. This is not medical advice and does not replace a consultation with a board-certified dermatologist. <a href="/privacy-policy">Privacy policy</a> · <a href="/terms">Terms</a>.</div>`;
+  html += `<p class="powered">Designed by a board-certified dermatologist · The Skin Brief</p>`;
+  return html;
+}
+
+async function runCheck(){
+  const products=pendingProducts;
+  const sess=tab;
+  const items=products.map(name=>({name,cat:detectCat(name)}));
+  const all=products.join(' ').toLowerCase();
+
+  const hasRetinol=/retinol|retinal\b|retinaldehyde/.test(all);
+  const hasRetinoid=/adapalene|tazarotene|trifarotene|tretinoin|retinoic acid/.test(all);
+  const hasAnyRetinoid=hasRetinol||hasRetinoid;
+  const hasAHA=/glycolic|aha\b|lactic acid|peeling/.test(all);
+  const hasBHA=/salicylic|bha\b/.test(all);
+  const hasVitC=/vitamin c|ascorbic|ferulic/.test(all);
+  const hasNiac=/niacinamide/.test(all);
+  const hasSPF=/spf|sunscreen|\buv\b/.test(all);
+  const hasOil=items.some(i=>i.cat==='oil');
+  const hasSerum=items.some(i=>['serum','vitc','copper'].includes(i.cat));
+  const hasBPO=/benzoyl/.test(all);
+  const hasCopper=/copper peptide/.test(all);
+
+  let retinoidTerm='';
+  if(hasRetinol) retinoidTerm='retinol';
+  if(hasRetinoid){
+    if(/adapalene/.test(all)) retinoidTerm='adapalene';
+    else if(/tretinoin/.test(all)) retinoidTerm='tretinoin';
+    else if(/tazarotene/.test(all)) retinoidTerm='tazarotene';
+    else if(/trifarotene/.test(all)) retinoidTerm='trifarotene';
+    else retinoidTerm='retinoid';
+  }
+
+  const conflicts=[];
+  const removedNames=[];
+
+  if(hasAnyRetinoid&&(hasAHA||hasBHA)){
+    const acidType=hasAHA&&hasBHA?'AHA and BHA':hasAHA?'AHA':'BHA';
+    conflicts.push({cls:'f-stop',icon:'✕',title:`${cap(retinoidTerm)} + ${acidType} — don't use together`,desc:`Combining ${retinoidTerm} and ${acidType.toLowerCase()} in the same routine significantly increases irritation and barrier disruption. Alternate nights: ${acidType.toLowerCase()} one night, ${retinoidTerm} the next.`});
+  }
+  if(hasVitC&&hasNiac) conflicts.push({cls:'f-ok',icon:'✓',title:'Vitamin C + niacinamide — fine to combine',desc:'The old advice to never layer these is largely a myth. At concentrations found in most serums they work safely together and complement each other\'s brightening effects.'});
+  if(hasAHA&&hasBHA&&!hasAnyRetinoid) conflicts.push({cls:'f-warn',icon:'!',title:'AHA + BHA together — use with caution',desc:'Layering glycolic and salicylic acid can be effective but over-exfoliating is a real risk. If you\'re new to actives, start with one at a time.'});
+  if(hasVitC&&(hasAHA||hasBHA)) conflicts.push({cls:'f-warn',icon:'!',title:'Vitamin C + acids — watch for irritation',desc:'Vitamin C is already acidic. Layering it with AHA or BHA can destabilize the Vitamin C and increase irritation. Consider using them at different times of day.'});
+  if(hasCopper&&hasVitC) conflicts.push({cls:'f-stop',icon:'✕',title:'Copper peptides + Vitamin C — avoid combining',desc:'Vitamin C can oxidize copper peptides, reducing the effectiveness of both. Use Vitamin C in the AM and copper peptides in the PM.'});
+  if(hasCopper&&(hasAHA||hasBHA)) conflicts.push({cls:'f-stop',icon:'✕',title:'Copper peptides + acids — avoid combining',desc:'AHA and BHA degrade copper peptides. Keep them in separate routines to preserve the efficacy of both.'});
+  if(hasNiac&&(hasAHA||hasBHA)) conflicts.push({cls:'f-warn',icon:'!',title:'Niacinamide + acids — pH mismatch',desc:'Niacinamide raises skin pH, which can reduce the effectiveness of AHA and BHA. Apply acids first, let them absorb fully, then apply niacinamide.'});
+  if(hasAnyRetinoid&&hasBPO) conflicts.push({cls:'f-stop',icon:'✕',title:`Benzoyl peroxide + ${retinoidTerm} — avoid combining`,desc:`Benzoyl peroxide can oxidize and deactivate ${retinoidTerm}. Use benzoyl peroxide in the morning and ${retinoidTerm} at night.`});
+
+  if(sess==='am'&&hasAnyRetinoid){
+    items.filter(i=>['retinol','retinoid'].includes(i.cat)).forEach(i=>{
+      removedNames.push({name:i.name,reason:'not recommended for morning use'});
+    });
+    conflicts.push({cls:'f-warn',icon:'!',title:`${cap(retinoidTerm)} in your morning routine`,desc:`${cap(retinoidTerm)} degrades in sunlight and increases photosensitivity. Reserve it for your PM routine.`});
+  }
+  if(sess==='pm'&&hasSPF){
+    items.filter(i=>i.cat==='spf').forEach(i=>{
+      removedNames.push({name:i.name,reason:'SPF is a morning step, not needed at night'});
+    });
+    conflicts.push({cls:'f-warn',icon:'!',title:'SPF at night isn\'t necessary',desc:'Sunscreen is only effective with UV exposure. Skip it at night and replace with a richer moisturizer or treatment instead.'});
+  }
+  if(sess==='am'&&!hasSPF) conflicts.push({cls:'f-warn',icon:'!',title:'No SPF detected in your morning routine',desc:'Sunscreen is non-negotiable in the AM, especially when using actives like Vitamin C or exfoliants that increase sun sensitivity.'});
+  if(hasOil&&hasSerum){
+    const oilIdx=items.findIndex(i=>i.cat==='oil');
+    const serumIdx=items.findIndex(i=>['serum','vitc','copper'].includes(i.cat));
+    if(oilIdx<serumIdx) conflicts.push({cls:'f-warn',icon:'!',title:'Apply your facial oil last',desc:'Oils are occlusive and block absorption of anything layered after them. Make sure your facial oil goes on after all water-based serums and creams.'});
+  }
+
+  const pregFlags=[];
+  if(hasAnyRetinoid) pregFlags.push(hasRetinol?'retinol':'retinoids');
+  if(hasBHA) pregFlags.push('salicylic acid (BHA)');
+  if(hasAHA) pregFlags.push('AHA exfoliants');
+  if(hasBPO) pregFlags.push('benzoyl peroxide');
+  if(/hydroquinone/.test(all)) pregFlags.push('hydroquinone');
+  if(/oxybenzone|avobenzone/.test(all)) pregFlags.push('chemical sunscreen filters');
+  if(pregFlags.length) conflicts.push({cls:'f-preg',icon:'!',title:`Pregnancy caution: ${pregFlags.join(', ')}`,desc:'These ingredients are not recommended during pregnancy or while breastfeeding. Please consult your OB-GYN or a board-certified dermatologist before use.'});
+
+  const removedNamesList=removedNames.map(r=>r.name.toLowerCase());
+  const filtered=items.filter(i=>!removedNamesList.includes(i.name.toLowerCase()));
+  const ordered=filtered.sort((a,b)=>(catOrder[a.cat]||5)-(catOrder[b.cat]||5));
+
+  currentResults={ordered,conflicts,sess,retinoidTerm,hasAnyRetinoid,removedNames};
+  renderResults(currentResults);
+}
+
+function renderResults(r){
+  const{ordered,conflicts,sess,retinoidTerm,hasAnyRetinoid,removedNames}=r;
+  const sessLabel=sess==='am'?'morning':'night';
+  let html='';
+
+  html+=`<p class="session-note">Reordered into the correct derm-designed sequence for your ${sessLabel} routine.</p>`;
+
+  html+=`<div style="margin-bottom:1.1rem"><div class="sec-label">Correct order</div>`;
+  ordered.forEach((item,i)=>{
+    const[tc,tl]=tagMap[item.cat]||['t-act','active'];
+    html+=`<div class="step-card"><div class="step-num">${i+1}</div><div class="step-body"><div class="step-top"><span class="step-name">${item.name}</span><span class="step-tag ${tc}">${tl}</span></div><p class="step-why">${getWhy(item.cat,item.name,sess)}</p></div></div>`;
+  });
+  if(removedNames.length){
+    removedNames.forEach(r=>{
+      html+=`<div class="removed-note">${r.name} removed from order — ${r.reason}. See conflict check below.</div>`;
+    });
+  }
+  html+=`</div>`;
+
+  if(conflicts.length){
+    html+=`<div style="margin-bottom:1.1rem"><div class="sec-label">Conflict check</div>`;
+    conflicts.forEach(c=>{html+=`<div class="flag ${c.cls}"><div class="f-icon">${c.icon}</div><div><p class="f-title">${c.title}</p><p class="f-desc">${c.desc}</p></div></div>`;});
+    html+=`</div>`;
+  }
+
+  if(hasAnyRetinoid&&retinoidTerm){
+    html+=`<div style="margin-bottom:1.1rem"><div class="sec-label">Derm tip</div>`;
+    html+=`<div class="flag f-tip"><div class="f-icon">i</div><div><p class="f-title">Moisture sandwich for ${retinoidTerm} users</p><p class="f-desc">If your ${retinoidTerm} is causing dryness or irritation, try every other night instead of nightly. You can also try a moisturizer sandwich: apply moisturizer first, then ${retinoidTerm} on top, then moisturizer again to buffer it.</p></div></div>`;
+    html+=`</div>`;
+  }
+
+  html+=`<div class="layer-guide"><button class="layer-toggle" onclick="toggleLayer()"><span>How to layer skincare for maximum results</span><span class="layer-arrow" id="layer-arrow">&#9660;</span></button><div class="layer-content" id="layer-content">
+    <div class="layer-rule"><div class="layer-rule-title">Thinnest to thickest</div><div class="layer-rule-desc">Always apply products in order of consistency — watery toners and serums first, then creams, then oils. Heavier products seal in everything underneath. If you reverse the order, lighter products cannot penetrate.</div></div>
+    <div class="layer-rule"><div class="layer-rule-title">SPF is always last</div><div class="layer-rule-desc">In the morning, sunscreen is the final step. Nothing goes on top of it. Applying moisturizer or makeup on top of SPF dilutes the protection.</div></div>
+  </div></div>`;
+
+  html+=`<div class="share-section">
+    <button class="share-btn" onclick="toggleSharePreview()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Share my lineup
+    </button>
+    <div class="share-preview" id="share-preview">
+      <div class="share-card-wrap" id="share-card-wrap">
+        <img src="skinelineupcard2.png" alt="" class="share-card-img" onerror="this.style.display='none'">
+        <div class="share-overlay">
+          <div class="share-session-label">${sessLabel} routine</div>
+          <div class="share-products">
+            ${ordered.slice(0,7).map((item,i)=>`<div class="share-product-row"><div class="share-product-num">${i+1}</div><span class="share-product-name">${item.name}</span></div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="share-actions">
+        <button class="share-action-btn" onclick="saveAsImage()">Save as image</button>
+        <button class="share-action-btn" onclick="doCopy()">Copy text</button>
+      </div>
+    </div>
+  </div>`;
+
+  html+=`<div class="cta-block"><div class="cta-text"><p>Enjoyed this? Follow for more skincare tips.</p><p>@skinbriefmd</p></div><a class="cta-follow" href="https://instagram.com/skinbriefmd" target="_blank">Follow on Instagram</a></div>`;
+  html+=`<div class="disclaimer">For educational purposes only. This is not medical advice and does not replace a consultation with a board-certified dermatologist. <a href="/privacy-policy">Privacy policy</a> · <a href="/terms">Terms</a>.</div>`;
+  html+=`<p class="powered">Designed by a board-certified dermatologist · The Skin Brief</p>`;
+
+  document.getElementById('results').innerHTML=html;
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('how-section').style.display='none';
+  document.getElementById('scroll-hint-wrap').style.display='none';
+}
+
+function toggleLayer(){
+  document.getElementById('layer-content').classList.toggle('show');
+  document.getElementById('layer-arrow').classList.toggle('open');
+}
+
+function toggleSharePreview(){
+  document.getElementById('share-preview').classList.toggle('show');
+}
+
+function doCopy(){
+  if(!currentResults)return;
+  const sess=currentResults.sess==='am'?'Morning':'Night';
+  const text=`My ${sess} Skin Lineup\n\n${currentResults.ordered.map((n,i)=>`${i+1}. ${n.name}`).join('\n')}\n\nGet yours: lisaprussickmd.com/skin-lineup\n@skinbriefmd`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btns=document.querySelectorAll('.share-action-btn');
+    if(btns[1]){btns[1].textContent='Copied!';setTimeout(()=>btns[1].textContent='Copy text',2000);}
+  });
+}
+
+function saveAsImage(){
+  if(!currentResults)return;
+  const W=1080,H=1920;
+  const canvas=document.getElementById('export-canvas');
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+
+  const doRender=()=>{
+    // Try to draw the Canva card image
+    const img=document.querySelector('.share-card-img');
+    if(img&&img.complete&&img.naturalWidth>0){
+      ctx.drawImage(img,0,0,W,H);
+    } else {
+      // Fallback background matching card color
+      ctx.fillStyle='#89c4e1';
+      ctx.fillRect(0,0,W,H);
+      // SKIN LINEUP text
+      ctx.fillStyle='#030c3f';
+      ctx.font='bold 160px sans-serif';
+      ctx.fillText('SKIN',80,220);
+      ctx.fillStyle='#d8ceba';
+      ctx.font='italic bold 160px serif';
+      ctx.fillText('LINEUP',80,400);
+    }
+
+    // Session label — starts at 52% down (after card graphic area)
+    const startY=H*0.52;
+    ctx.fillStyle='rgba(26,42,74,0.6)';
+    ctx.font='500 52px sans-serif';
+    ctx.letterSpacing='6px';
+    const sessLabel=currentResults.sess==='am'?'MORNING ROUTINE':'NIGHT ROUTINE';
+    ctx.fillText(sessLabel,80,startY);
+
+    // Products
+    currentResults.ordered.slice(0,7).forEach((item,i)=>{
+      const y=startY+120+(i*120);
+      // Number circle
+      ctx.beginPath();ctx.arc(110,y-20,44,0,Math.PI*2);
+      ctx.fillStyle='#030c3f';ctx.fill();
+      ctx.fillStyle='#FEF284';
+      ctx.font='bold 48px sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText(i+1,110,y+16);
+      // Name
+      ctx.textAlign='left';
+      ctx.fillStyle='#030c3f';
+      ctx.font='500 54px sans-serif';
+      // Truncate long names
+      let name=item.name;
+      if(ctx.measureText(name).width>820) name=name.slice(0,32)+'...';
+      ctx.fillText(name,180,y+16);
+    });
+
+    // Handle
+    ctx.fillStyle='rgba(26,42,74,0.5)';
+    ctx.font='46px sans-serif';
+    ctx.textAlign='right';
+    ctx.fillText('@skinbriefmd',W-60,H-60);
+
+    canvas.style.display='block';
+    const link=document.createElement('a');
+    link.download='my-skin-lineup.jpg';
+    link.href=canvas.toDataURL('image/jpeg',0.92);
+    link.click();
+    canvas.style.display='none';
+    ctx.letterSpacing='0px';
+    ctx.textAlign='left';
+  };
+
+  if(typeof html2canvas!=='undefined'){
+    const wrap=document.getElementById('share-card-wrap');
+    html2canvas(wrap,{scale:2,useCORS:true,backgroundColor:null,width:wrap.offsetWidth,height:wrap.offsetHeight}).then(c=>{
+      // Draw onto 1080x1920 canvas
+      const aspect=wrap.offsetHeight/wrap.offsetWidth;
+      const outH=Math.round(W*aspect);
+      canvas.width=W;canvas.height=Math.max(outH,H);
+      ctx.drawImage(c,0,0,W,canvas.height);
+      canvas.style.display='block';
+      const link=document.createElement('a');
+      link.download='my-skin-lineup.jpg';
+      link.href=canvas.toDataURL('image/jpeg',0.92);
+      link.click();
+      canvas.style.display='none';
+    }).catch(()=>doRender());
+  } else {
+    doRender();
+  }
+}
+
+addRow();addRow();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<footer class="tsb-footer">
+  <div class="tsb-footer-top">
+    <div class="tsb-footer-logo">The Skin Brief · Lisa Prussick, MD</div>
+    <div class="tsb-si-wrap">
+      <a href="https://x.com/LisaPrussickMD" target="_blank" class="tsb-si"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://instagram.com/skinbriefmd" target="_blank" class="tsb-si"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#F2F4FB"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#F2F4FB" stroke-width="2"/></svg></a>
+      <a href="https://pinterest.com/lisaprussickmd" target="_blank" class="tsb-si"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.141-.828 3.33-.236.995.499 1.806 1.476 1.806 1.772 0 3.137-1.867 3.137-4.561 0-2.386-1.715-4.052-4.163-4.052-2.836 0-4.498 2.127-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.076.315-.245.995-.278 1.134-.044.183-.145.222-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.967-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></a>
+    </div>
+  </div>
+  <div class="tsb-footer-bottom">
+    <div class="tsb-footer-col-wrap">
+      <div class="tsb-footer-col">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skin-lineup.html">Skin Lineup</a>
+        <a href="blog.html">Blog</a>
+        <a href="quiz.html">Skin Quiz</a>
+        <a href="kids.html">Kids</a>
+      </div>
+      <div class="tsb-footer-col">
+        <h4>Connect</h4>
+        <a href="https://instagram.com/skinbriefmd" target="_blank">Instagram</a>
+        <a href="https://skinbriefmd.substack.com" target="_blank">Newsletter</a>
+        <a href="https://pinterest.com/lisaprussickmd" target="_blank">Pinterest</a>
+        <a href="https://x.com/LisaPrussickMD" target="_blank">X / Twitter</a>
+      </div>
+      <div class="tsb-footer-col">
+        <h4>Legal</h4>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+      <div class="tsb-footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@lisaprussickmd.com">hello@lisaprussickmd.com</a>
+      </div>
+    </div>
+    <span class="tsb-footer-copy">© 2026 Lisa Prussick, MD</span>
+  </div>
+</footer>
+</body>
+</html>

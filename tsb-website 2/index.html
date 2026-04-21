@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="p:domain_verify" content="be3d3648f46c15dbf7964cbd8b3571ba"/>
+<title>The Skin Brief — Lisa Prussick, MD | Dermatologist-Backed Skincare Education</title>
+<meta name="description" content="Board-certified dermatologist Lisa Prussick, MD simplifies skincare science. Evidence-based education on ingredients, routines, and skin health — no fluff.">
+<meta property="og:title" content="The Skin Brief — Lisa Prussick, MD">
+<meta property="og:description" content="Dermatology, edited into what matters. Skincare education from a board-certified dermatologist.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lisaprussickmd.com">
+<link rel="canonical" href="https://lisaprussickmd.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ice:#F5F9FD;--frost:#F2F4FB;--ink:#1A2A3D;--ink-mid:#2E3F54;--ink-light:#3D5068;--corn:#B8C8F0;--peri:#C8D0F5;--border:#D8E2F0;--white:#FFFFFF;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--ice);color:var(--ink);}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 48px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--ink);text-decoration:none;}
+.nav-links{display:flex;gap:20px;align-items:center;}
+.nav-links a{font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-light);font-weight:500;text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-divider{width:1px;height:14px;background:var(--border);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{width:22px;height:2px;background:var(--ink);border-radius:2px;display:block;}
+.mobile-menu{display:none;background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px;flex-direction:column;gap:16px;}
+.mobile-menu a{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-light);font-weight:500;text-decoration:none;}
+.mobile-menu.open{display:flex;}
+.hero{background:var(--ice);padding:52px 48px;border-bottom:1px solid var(--border);}
+.hero-card{background:var(--white);border:1px solid var(--border);border-radius:2px;padding:48px;position:relative;overflow:hidden;display:flex;gap:40px;align-items:center;}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--corn),var(--peri));}
+.hero-text{flex:1;}
+.eyebrow{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-light);font-weight:500;margin-bottom:16px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:38px;font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:20px;}
+.hero-title em{font-style:italic;color:var(--ink-mid);}
+.rule{width:36px;height:1px;background:var(--corn);margin-bottom:18px;}
+.tagline{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:32px;}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{padding:12px 22px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s;}
+.btn-dark{background:var(--ink);color:var(--white);border:none;}
+.btn-dark:hover{background:var(--ink-mid);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+.btn-outline:hover{background:var(--frost);}
+.hero-photo{width:140px;flex-shrink:0;border-radius:2px;overflow:hidden;border:1px solid var(--border);}
+.hero-photo img{width:100%;display:block;object-fit:cover;object-position:center top;height:175px;}
+.features{padding:48px;background:var(--ice);}
+.sec-label{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-mid);font-weight:600;margin-bottom:18px;}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.feat{background:var(--white);border:1px solid var(--border);border-radius:2px;padding:20px;}
+.feat-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.fdot{width:8px;height:8px;border-radius:50%;background:var(--corn);flex-shrink:0;}
+.ft{font-size:12px;font-weight:600;color:var(--ink);}
+.fd{font-size:12px;color:var(--ink-light);line-height:1.7;}
+.ig-link{color:var(--ink);text-decoration:underline;font-weight:500;}
+.quiz-wrap{padding:0 48px 48px;background:var(--ice);}
+.quiz-strip{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--corn);padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.qs-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--corn);font-weight:600;margin-bottom:5px;}
+.qs-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--ink);}
+.newsletter{background:var(--ice);border-top:1px solid var(--border);padding:48px;}
+.nl-card{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--corn);border-radius:0;padding:36px 40px;display:flex;gap:48px;align-items:center;}
+
+.nl-text{flex:1;}
+.nl-eyebrow{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--corn);font-weight:600;margin-bottom:10px;}
+.nl-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--ink);margin-bottom:8px;}
+.nl-desc{font-size:13px;color:var(--ink-light);line-height:1.7;font-weight:300;}.nl-sub-desc{font-size:13px;color:var(--ink-light);line-height:1.7;font-weight:300;margin-bottom:4px;}
+.nl-form{flex:1;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.fi{padding:11px 14px;border:1px solid var(--border);border-radius:2px;font-size:13px;color:var(--ink);background:var(--frost);font-family:'DM Sans',sans-serif;width:100%;}
+.fi:focus{outline:none;border-color:var(--corn);}
+.sub-btn{width:100%;padding:13px;background:var(--ink);color:var(--white);border:none;border-radius:2px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;margin-top:10px;transition:background 0.2s;}
+.sub-btn:hover{background:var(--ink-mid);}
+footer{background:var(--white);border-top:1px solid var(--border);padding:28px 48px;}
+.footer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.footer-logo{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-mid);font-weight:500;}
+.si-wrap{display:flex;gap:10px;}
+.si{width:32px;height:32px;border-radius:50%;background:var(--frost);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color 0.2s;}
+.si:hover{border-color:var(--corn);}
+.si svg{width:14px;height:14px;fill:var(--ink-mid);}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.footer-col-wrap{display:flex;gap:48px;flex-wrap:wrap;}
+.footer-col h4{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mid);font-weight:600;margin-bottom:10px;}
+.footer-col a{display:block;font-size:11px;color:var(--ink-light);text-decoration:none;margin-bottom:6px;transition:color 0.2s;}
+.footer-col a:hover{color:var(--ink);}
+.footer-copy{font-size:10px;color:var(--ink-light);align-self:flex-end;}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(26,42,61,0.55);z-index:999;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:2px;padding:40px;width:100%;max-width:540px;position:relative;border-top:3px solid var(--corn);max-height:90vh;overflow-y:auto;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;color:var(--ink-light);cursor:pointer;}
+.modal-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--ink);margin-bottom:6px;}
+.modal-sub{font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:22px;}
+.cf-label{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-mid);font-weight:600;margin-bottom:5px;margin-top:14px;display:block;}
+.cf-input{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:2px;font-size:13px;color:var(--ink);background:var(--frost);font-family:'DM Sans',sans-serif;}
+.cf-input:focus{outline:none;border-color:var(--corn);}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cf-ta{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:2px;font-size:13px;color:var(--ink);background:var(--frost);font-family:'DM Sans',sans-serif;height:110px;resize:none;}
+.cf-ta:focus{outline:none;border-color:var(--corn);}
+.cf-btn{width:100%;margin-top:18px;padding:14px;background:var(--ink);color:var(--white);border:none;border-radius:2px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
+.cf-btn:hover{background:var(--ink-mid);}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:28px 20px;}
+  .hero-card{flex-direction:column-reverse;padding:24px;gap:20px;}
+  .hero-photo{width:90px;}
+  .hero-title{font-size:26px;}
+  .features{padding:28px 20px;}
+  .feat-grid{grid-template-columns:1fr;}
+  .quiz-wrap{padding:0 20px 28px;}
+  .quiz-strip{flex-direction:column;align-items:flex-start;}
+  .newsletter{padding:28px 20px;}
+  .nl-card{flex-direction:column;padding:24px;gap:20px;}
+  footer{padding:16px 20px;}
+  .footer-top{flex-direction:column;gap:14px;align-items:flex-start;}
+  .footer-bottom{flex-direction:column;gap:10px;}
+  .form-row{grid-template-columns:1fr;}
+  .cf-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">Work with Lisa Prussick, MD</div>
+    <p class="modal-sub">Interested in medical writing, brand content, or skincare education? Fill out the form and I'll be in touch shortly.</p>
+    <form action="https://formspree.io/f/xaqloyyj" method="POST">
+      <div class="cf-row">
+        <div><span class="cf-label">First Name</span><input class="cf-input" type="text" name="first-name" placeholder="First name" required></div>
+        <div><span class="cf-label">Last Name</span><input class="cf-input" type="text" name="last-name" placeholder="Last name" required></div>
+      </div>
+      <span class="cf-label">Email</span><input class="cf-input" type="email" name="email" placeholder="your@email.com" required>
+      <span class="cf-label">Subject</span><input class="cf-input" type="text" name="subject" placeholder="e.g. Medical writing inquiry">
+      <span class="cf-label">Message</span><textarea class="cf-ta" name="message" placeholder="Tell me about your project..." required></textarea>
+      <button type="submit" class="cf-btn">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">The Skin Brief</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="skin-lineup.html">Skin Lineup</a>
+    <a href="blog.html">Blog</a>
+    <a href="quiz.html">Skin Quiz</a>
+    <a href="kids.html">Kids</a>
+    <div class="nav-divider"></div>
+    <a href="https://skinbriefmd.substack.com" target="_blank">Newsletter</a>
+    <a href="https://instagram.com/skinbriefmd" target="_blank">Instagram</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="skin-lineup.html">Skin Lineup</a>
+  <a href="blog.html">Blog</a>
+  <a href="quiz.html">Skin Quiz</a>
+  <a href="kids.html">Kids</a>
+  <a href="https://skinbriefmd.substack.com" target="_blank">Newsletter</a>
+  <a href="https://instagram.com/skinbriefmd" target="_blank">Instagram</a>
+</div>
+
+<section class="hero">
+  <div class="hero-card">
+    <div class="hero-text">
+      <div class="eyebrow">Lisa Prussick, MD, FAAD · Board-Certified Dermatologist</div>
+      <h1 class="hero-title">Dermatology, <em>edited</em><br>into what matters.</h1>
+      <div class="rule"></div>
+      <div class="tagline">skincare, uncomplicated. just the brief.</div>
+      <div class="btn-row">
+        <a href="https://skinbriefmd.substack.com" target="_blank" class="btn btn-outline">Newsletter</a>
+        <a href="https://instagram.com/skinbriefmd" target="_blank" class="btn btn-outline">Follow on Instagram</a>
+        <button class="btn btn-outline" onclick="openModal()">Work with Me</button>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="headshot.jpg" alt="Lisa Prussick, MD — Board-Certified Dermatologist">
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="sec-label">What you'll find here</div>
+  <div class="feat-grid">
+    <div class="feat"><div class="feat-header"><div class="fdot"></div><div class="ft">Derm-Backed Education</div></div><div class="fd">Ingredient breakdowns, myth-busting, and routine guidance — no fluff.</div></div>
+    <div class="feat"><div class="feat-header"><div class="fdot"></div><div class="ft">Weekly Newsletter</div></div><div class="fd">The Skin Brief: derm-backed skincare education straight to your inbox.</div></div>
+    <div class="feat"><div class="feat-header"><div class="fdot"></div><div class="ft">Instagram Content</div></div><div class="fd">Follow <a href="https://instagram.com/skinbriefmd" target="_blank" class="ig-link">@skinbriefmd</a> for short-form derm education every week.</div></div>
+    <div class="feat"><div class="feat-header"><div class="fdot"></div><div class="ft">Free Skin Type Quiz</div></div><div class="fd">Five questions. Find out your skin type and what it actually needs.</div></div>
+  </div>
+</section>
+
+<div class="quiz-wrap">
+  <div class="quiz-strip">
+    <div><div class="qs-label">Free Quiz</div><div class="qs-title">Know your skin type. Know your routine.</div></div>
+    <a href="quiz.html" class="btn btn-dark">Take the Quiz →</a>
+  </div>
+</div>
+
+<section class="newsletter">
+  <div class="nl-card">
+    <div class="nl-text">
+      <div class="nl-eyebrow">Free Newsletter</div>
+      <div class="nl-title">The Skin Brief, in your inbox.</div>
+      <p class="nl-desc">Derm-backed skincare cheat sheet delivered weekly.</p>
+    </div>
+    <div class="nl-form">
+      <p class="nl-sub-desc">Join readers who get derm-backed skincare education delivered weekly — straight from a board-certified dermatologist.</p>
+      <a href="https://skinbriefmd.substack.com/subscribe" target="_blank" class="sub-btn" style="display:block;text-align:center;text-decoration:none;margin-top:20px;">Subscribe on Substack →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">The Skin Brief · Lisa Prussick, MD</div>
+    <div class="si-wrap">
+      <a href="https://x.com/LisaPrussickMD" target="_blank" class="si" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://instagram.com/skinbriefmd" target="_blank" class="si" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="var(--white)"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="var(--white)" stroke-width="2"/></svg></a>
+      <a href="https://pinterest.com/lisaprussickmd" target="_blank" class="si" aria-label="Pinterest"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.141-.828 3.33-.236.995.499 1.806 1.476 1.806 1.772 0 3.137-1.867 3.137-4.561 0-2.386-1.715-4.052-4.163-4.052-2.836 0-4.498 2.127-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.076.315-.245.995-.278 1.134-.044.183-.145.222-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.967-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-col-wrap">
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skin-lineup.html">Skin Lineup</a>
+        <a href="blog.html">Blog</a>
+        <a href="quiz.html">Skin Quiz</a>
+        <a href="kids.html">Kids</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="https://instagram.com/skinbriefmd" target="_blank">Instagram</a>
+        <a href="https://skinbriefmd.substack.com" target="_blank">Newsletter</a>
+        <a href="https://pinterest.com/lisaprussickmd" target="_blank">Pinterest</a>
+        <a href="https://x.com/LisaPrussickMD" target="_blank">X / Twitter</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@lisaprussickmd.com">hello@lisaprussickmd.com</a>
+      </div>
+    </div>
+    <span class="footer-copy">© 2026 Lisa Prussick, MD</span>
+  </div>
+</footer>
+
+<script>
+function openModal(){document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+</script>
+</body>
+</html>
