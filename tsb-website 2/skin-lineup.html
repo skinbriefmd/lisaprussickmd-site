@@ -362,70 +362,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--ice);color:var(--text);mi
 <canvas id="export-canvas"></canvas>
 
 <script>
-const PRODUCTS=[
-  {name:"CeraVe Hydrating Cleanser",detail:"gentle, non-foaming · cleanser",cat:"cleanser"},
-  {name:"CeraVe Foaming Cleanser",detail:"normal to oily skin · cleanser",cat:"cleanser"},
-  {name:"CeraVe Moisturizing Cream",detail:"ceramides, hyaluronic acid · moisturizer",cat:"moisturizer"},
-  {name:"CeraVe PM Facial Moisturizing Lotion",detail:"niacinamide, ceramides · moisturizer",cat:"moisturizer"},
-  {name:"La Roche-Posay Toleriane Cleanser",detail:"sensitive skin · cleanser",cat:"cleanser"},
-  {name:"La Roche-Posay Cicaplast Baume B5",detail:"barrier repair · moisturizer",cat:"moisturizer"},
-  {name:"La Roche-Posay Anthelios SPF 50",detail:"broad spectrum · sunscreen",cat:"spf"},
-  {name:"EltaMD UV Clear SPF 46",detail:"niacinamide, zinc · sunscreen",cat:"spf"},
-  {name:"EltaMD UV Daily SPF 40",detail:"hyaluronic acid · sunscreen",cat:"spf"},
-  {name:"The Ordinary Niacinamide 10%",detail:"pore minimizing, brightening · serum",cat:"serum"},
-  {name:"The Ordinary Glycolic Acid 7% Toning Solution",detail:"AHA exfoliant · active",cat:"active"},
-  {name:"The Ordinary Retinol 0.5%",detail:"PM only · active",cat:"retinol"},
-  {name:"The Ordinary Retinol 1%",detail:"PM only, stronger · active",cat:"retinol"},
-  {name:"The Ordinary Hyaluronic Acid 2% + B5",detail:"hydration · serum",cat:"serum"},
-  {name:"The Ordinary AHA 30% + BHA 2% Peeling Solution",detail:"weekly exfoliant · active",cat:"active"},
-  {name:"The Ordinary Salicylic Acid 2%",detail:"BHA, acne-prone skin · active",cat:"active"},
-  {name:"Paula's Choice BHA 2% Liquid Exfoliant",detail:"salicylic acid · active",cat:"active"},
-  {name:"Paula's Choice 10% Niacinamide Booster",detail:"brightening · serum",cat:"serum"},
-  {name:"SkinCeuticals CE Ferulic",detail:"Vitamin C 15%, antioxidant · serum",cat:"vitc"},
-  {name:"SkinCeuticals Triple Lipid Restore",detail:"ceramides, cholesterol · moisturizer",cat:"moisturizer"},
-  {name:"SkinCeuticals Hydrating B5 Gel",detail:"hyaluronic acid · serum",cat:"serum"},
-  {name:"Drunk Elephant T.L.C. Framboos Glycolic Night Serum",detail:"AHA/BHA blend · active",cat:"active"},
-  {name:"Drunk Elephant Protini Polypeptide Cream",detail:"peptides · moisturizer",cat:"moisturizer"},
-  {name:"Drunk Elephant Lala Retro Whipped Cream",detail:"ceramides · moisturizer",cat:"moisturizer"},
-  {name:"Tatcha The Water Cream",detail:"oil-free · moisturizer",cat:"moisturizer"},
-  {name:"Tatcha The Rice Wash",detail:"softening cleanser · cleanser",cat:"cleanser"},
-  {name:"Dr. Idriss Hyper Serum",detail:"hyperpigmentation, niacinamide · serum",cat:"serum"},
-  {name:"Dr. Idriss Night Shift Retinol",detail:"retinol, PM only · active",cat:"retinol"},
-  {name:"Differin Adapalene Gel 0.1%",detail:"retinoid, PM only · active",cat:"retinoid"},
-  {name:"Neutrogena Rapid Wrinkle Repair Retinol",detail:"retinol · active",cat:"retinol"},
-  {name:"Neutrogena Hydro Boost Water Gel",detail:"hyaluronic acid · moisturizer",cat:"moisturizer"},
-  {name:"Neutrogena Ultra Sheer SPF 100",detail:"chemical sunscreen · sunscreen",cat:"spf"},
-  {name:"Olay Regenerist Retinol 24 Serum",detail:"retinol, niacinamide · active",cat:"retinol"},
-  {name:"DHC Deep Cleansing Oil",detail:"makeup remover, first cleanse · cleansing oil",cat:"cleanser"},
-  {name:"Banila Co Clean It Zero",detail:"cleansing balm, first cleanse · cleanser",cat:"cleanser"},
-  {name:"Heimish All Clean Balm",detail:"cleansing balm, first cleanse · cleanser",cat:"cleanser"},
-  {name:"Kose Softymo Speedy Cleansing Oil",detail:"Japanese cleansing oil · cleanser",cat:"cleanser"},
-  {name:"GlowRecipe Watermelon Glow Niacinamide Dew Drops",detail:"niacinamide, hyaluronic acid · serum",cat:"serum"},
-  {name:"Vitamin C serum",detail:"antioxidant, brightening · serum",cat:"vitc"},
-  {name:"Retinol serum",detail:"PM only · active",cat:"retinol"},
-  {name:"Retinol cream",detail:"PM only · active",cat:"retinol"},
-  {name:"Tretinoin",detail:"prescription retinoid, PM only · active",cat:"retinoid"},
-  {name:"Adapalene",detail:"synthetic retinoid, PM only · active",cat:"retinoid"},
-  {name:"Tazarotene",detail:"prescription retinoid, PM only · active",cat:"retinoid"},
-  {name:"Trifarotene",detail:"prescription retinoid, PM only · active",cat:"retinoid"},
-  {name:"Niacinamide serum",detail:"brightening, barrier support · serum",cat:"serum"},
-  {name:"Hyaluronic acid serum",detail:"humectant · serum",cat:"serum"},
-  {name:"Peptide serum",detail:"anti-aging · serum",cat:"serum"},
-  {name:"Copper peptide serum",detail:"anti-aging, barrier repair · serum",cat:"copper"},
-  {name:"Azelaic acid",detail:"rosacea, hyperpigmentation · active",cat:"active"},
-  {name:"Benzoyl peroxide wash",detail:"acne · cleanser",cat:"bpo"},
-  {name:"Clindamycin gel",detail:"antibiotic, acne · active",cat:"active"},
-  {name:"Centella toner",detail:"soothing, anti-inflammatory · toner",cat:"toner"},
-  {name:"Rose water toner",detail:"hydrating · toner",cat:"toner"},
-  {name:"Facial oil",detail:"sealing step · oil",cat:"oil"},
-  {name:"Rosehip oil",detail:"vitamins A, C · oil",cat:"oil"},
-  {name:"Squalane oil",detail:"lightweight, barrier · oil",cat:"oil"},
-  {name:"Eye cream",detail:"targeted treatment · eye cream",cat:"eyecream"},
-  {name:"SPF",detail:"broad spectrum sunscreen",cat:"spf"},
-  {name:"Sunscreen",detail:"broad spectrum",cat:"spf"},
-  {name:"Moisturizer",detail:"hydration, barrier",cat:"moisturizer"},
-  {name:"Cleanser",detail:"first step",cat:"cleanser"},
-];
+const PRODUCTS=[];// Legacy fallback — autocomplete now powered by Claude API
+
+
 
 const catOrder={cleanser:1,toner:2,vitc:3,active:4,retinol:4,retinoid:4,copper:4,bpo:4,serum:5,eyecream:6,moisturizer:7,oil:8,spf:9};
 const tagMap={cleanser:["t-clean","cleanser"],toner:["t-tone","toner"],vitc:["t-ser","serum"],serum:["t-ser","serum"],active:["t-act","active"],retinol:["t-act","active"],retinoid:["t-act","active"],copper:["t-ser","serum"],bpo:["t-clean","cleanser"],moisturizer:["t-moist","moisturizer"],oil:["t-oil","facial oil"],spf:["t-spf","sunscreen"],eyecream:["t-moist","eye cream"]};
@@ -470,14 +409,26 @@ function addRow(val=''){
   if(!val) inp.focus();
 }
 
+const lookupTimers={};
 function handleInput(id){
-  const v=document.getElementById('inp-'+id).value.trim().toLowerCase();
+  const v=document.getElementById('inp-'+id).value.trim();
   const ac=document.getElementById('ac-'+id);
   if(v.length<2){ac.classList.remove('show');ac.innerHTML='';return;}
-  const m=PRODUCTS.filter(p=>p.name.toLowerCase().includes(v)).slice(0,5);
-  if(!m.length){ac.classList.remove('show');return;}
-  ac.innerHTML=m.map((p,i)=>`<div class="ac-item" id="ac-${id}-${i}" data-name="${p.name.replace(/"/g,'&quot;')}" onmousedown="selectAC(${id},this)"><span class="ac-name">${hl(p.name,v)}</span><span class="ac-detail">${p.detail}</span></div>`).join('');
-  ac.classList.add('show');activeAC={id,idx:-1,max:m.length};
+  // Show loading state
+  ac.innerHTML=`<div class="ac-item"><span class="ac-detail" style="font-style:italic">Looking up products…</span></div>`;
+  ac.classList.add('show');
+  // Debounce — wait 400ms after user stops typing
+  clearTimeout(lookupTimers[id]);
+  lookupTimers[id]=setTimeout(async()=>{
+    try{
+      const res=await fetch('/.netlify/functions/lookup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:v})});
+      const data=await res.json();
+      const m=(data.results||[]).slice(0,5);
+      if(!m.length){ac.classList.remove('show');ac.innerHTML='';return;}
+      ac.innerHTML=m.map((p,i)=>`<div class="ac-item" id="ac-${id}-${i}" data-name="${p.name.replace(/"/g,'&quot;')}" onmousedown="selectAC(${id},this)"><span class="ac-name">${hl(p.name,v)}</span><span class="ac-detail">${p.detail}</span></div>`).join('');
+      ac.classList.add('show');activeAC={id,idx:-1,max:m.length};
+    }catch(e){ac.classList.remove('show');ac.innerHTML='';}
+  },400);
 }
 
 function hl(s,q){const i=s.toLowerCase().indexOf(q);if(i<0)return s;return s.slice(0,i)+'<strong>'+s.slice(i,i+q.length)+'</strong>'+s.slice(i+q.length);}
@@ -670,84 +621,41 @@ function renderBottomSection(ordered, sess, sessLabel) {
   return html;
 }
 
+
+
 async function runCheck(){
   const products=pendingProducts;
   const sess=tab;
-  const items=products.map(name=>({name,cat:detectCat(name)}));
-  const all=products.join(' ').toLowerCase();
 
-  const hasRetinol=/retinol|retinal\b|retinaldehyde/.test(all);
-  const hasRetinoid=/adapalene|tazarotene|trifarotene|tretinoin|retinoic acid/.test(all);
-  const hasAnyRetinoid=hasRetinol||hasRetinoid;
-  const hasAHA=/glycolic|aha\b|lactic acid|peeling/.test(all);
-  const hasBHA=/salicylic|bha\b/.test(all);
-  const hasVitC=/vitamin c|ascorbic|ferulic/.test(all);
-  const hasNiac=/niacinamide/.test(all);
-  const hasSPF=/spf|sunscreen|\buv\b/.test(all);
-  const hasOil=items.some(i=>i.cat==='oil');
-  const hasSerum=items.some(i=>['serum','vitc','copper'].includes(i.cat));
-  const hasBPO=/benzoyl/.test(all);
-  const hasCopper=/copper peptide/.test(all);
-
-  let retinoidTerm='';
-  if(hasRetinol) retinoidTerm='retinol';
-  if(hasRetinoid){
-    if(/adapalene/.test(all)) retinoidTerm='adapalene';
-    else if(/tretinoin/.test(all)) retinoidTerm='tretinoin';
-    else if(/tazarotene/.test(all)) retinoidTerm='tazarotene';
-    else if(/trifarotene/.test(all)) retinoidTerm='trifarotene';
-    else retinoidTerm='retinoid';
+  // Show loading state
+  const resultsEl=document.getElementById('results');
+  resultsEl.innerHTML=`<div style="text-align:center;padding:2rem 0;color:var(--muted);font-size:14px;">
+    <div style="width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 1rem;"></div>
+    Analyzing your routine…
+  </div>`;
+  if(!document.getElementById('sl-spin-style')){
+    const st=document.createElement('style');
+    st.id='sl-spin-style';
+    st.textContent='@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(st);
   }
 
-  const conflicts=[];
-  const removedNames=[];
-
-  if(hasAnyRetinoid&&(hasAHA||hasBHA)){
-    const acidType=hasAHA&&hasBHA?'AHA and BHA':hasAHA?'AHA':'BHA';
-    conflicts.push({cls:'f-stop',icon:'✕',title:`${cap(retinoidTerm)} + ${acidType} — don't use together`,desc:`Combining ${retinoidTerm} and ${acidType.toLowerCase()} in the same routine significantly increases irritation and barrier disruption. Alternate nights: ${acidType.toLowerCase()} one night, ${retinoidTerm} the next.`});
-  }
-  if(hasVitC&&hasNiac) conflicts.push({cls:'f-ok',icon:'✓',title:'Vitamin C + niacinamide — fine to combine',desc:'The old advice to never layer these is largely a myth. At concentrations found in most serums they work safely together and complement each other\'s brightening effects.'});
-  if(hasAHA&&hasBHA&&!hasAnyRetinoid) conflicts.push({cls:'f-warn',icon:'!',title:'AHA + BHA together — use with caution',desc:'Layering glycolic and salicylic acid can be effective but over-exfoliating is a real risk. If you\'re new to actives, start with one at a time.'});
-  if(hasVitC&&(hasAHA||hasBHA)) conflicts.push({cls:'f-warn',icon:'!',title:'Vitamin C + acids — watch for irritation',desc:'Vitamin C is already acidic. Layering it with AHA or BHA can destabilize the Vitamin C and increase irritation. Consider using them at different times of day.'});
-  if(hasCopper&&hasVitC) conflicts.push({cls:'f-stop',icon:'✕',title:'Copper peptides + Vitamin C — avoid combining',desc:'Vitamin C can oxidize copper peptides, reducing the effectiveness of both. Use Vitamin C in the AM and copper peptides in the PM.'});
-  if(hasCopper&&(hasAHA||hasBHA)) conflicts.push({cls:'f-stop',icon:'✕',title:'Copper peptides + acids — avoid combining',desc:'AHA and BHA degrade copper peptides. Keep them in separate routines to preserve the efficacy of both.'});
-  if(hasNiac&&(hasAHA||hasBHA)) conflicts.push({cls:'f-warn',icon:'!',title:'Niacinamide + acids — pH mismatch',desc:'Niacinamide raises skin pH, which can reduce the effectiveness of AHA and BHA. Apply acids first, let them absorb fully, then apply niacinamide.'});
-  if(hasAnyRetinoid&&hasBPO) conflicts.push({cls:'f-stop',icon:'✕',title:`Benzoyl peroxide + ${retinoidTerm} — avoid combining`,desc:`Benzoyl peroxide can oxidize and deactivate ${retinoidTerm}. Use benzoyl peroxide in the morning and ${retinoidTerm} at night.`});
-
-  if(sess==='am'&&hasAnyRetinoid){
-    items.filter(i=>['retinol','retinoid'].includes(i.cat)).forEach(i=>{
-      removedNames.push({name:i.name,reason:'not recommended for morning use'});
+  try{
+    const res=await fetch('/.netlify/functions/analyze',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({products,session:sess})
     });
-    conflicts.push({cls:'f-warn',icon:'!',title:`${cap(retinoidTerm)} in your morning routine`,desc:`${cap(retinoidTerm)} degrades in sunlight and increases photosensitivity. Reserve it for your PM routine.`});
+    const result=await res.json();
+    if(!res.ok||result.error){
+      resultsEl.innerHTML=`<p style="font-size:14px;color:var(--stop-t);padding:.5rem 0">Something went wrong analyzing your routine. Please try again.</p>`;
+      return;
+    }
+    renderAIResults(result,sess);
+  }catch(err){
+    console.error('runCheck error:',err);
+    resultsEl.innerHTML=`<p style="font-size:14px;color:var(--stop-t);padding:.5rem 0">Connection error. Please check your internet and try again.</p>`;
   }
-  if(sess==='pm'&&hasSPF){
-    items.filter(i=>i.cat==='spf').forEach(i=>{
-      removedNames.push({name:i.name,reason:'SPF is a morning step, not needed at night'});
-    });
-    conflicts.push({cls:'f-warn',icon:'!',title:'SPF at night isn\'t necessary',desc:'Sunscreen is only effective with UV exposure. Skip it at night and replace with a richer moisturizer or treatment instead.'});
-  }
-  if(sess==='am'&&!hasSPF) conflicts.push({cls:'f-warn',icon:'!',title:'No SPF detected in your morning routine',desc:'Sunscreen is non-negotiable in the AM, especially when using actives like Vitamin C or exfoliants that increase sun sensitivity.'});
-  if(hasOil&&hasSerum){
-    const oilIdx=items.findIndex(i=>i.cat==='oil');
-    const serumIdx=items.findIndex(i=>['serum','vitc','copper'].includes(i.cat));
-    if(oilIdx<serumIdx) conflicts.push({cls:'f-warn',icon:'!',title:'Apply your facial oil last',desc:'Oils are occlusive and block absorption of anything layered after them. Make sure your facial oil goes on after all water-based serums and creams.'});
-  }
-
-  const pregFlags=[];
-  if(hasAnyRetinoid) pregFlags.push(hasRetinol?'retinol':'retinoids');
-  if(hasBHA) pregFlags.push('salicylic acid (BHA)');
-  if(hasAHA) pregFlags.push('AHA exfoliants');
-  if(hasBPO) pregFlags.push('benzoyl peroxide');
-  if(/hydroquinone/.test(all)) pregFlags.push('hydroquinone');
-  if(/oxybenzone|avobenzone/.test(all)) pregFlags.push('chemical sunscreen filters');
-  if(pregFlags.length) conflicts.push({cls:'f-preg',icon:'!',title:`Pregnancy caution: ${pregFlags.join(', ')}`,desc:'These ingredients are not recommended during pregnancy or while breastfeeding. Please consult your OB-GYN or a board-certified dermatologist before use.'});
-
-  const removedNamesList=removedNames.map(r=>r.name.toLowerCase());
-  const filtered=items.filter(i=>!removedNamesList.includes(i.name.toLowerCase()));
-  const ordered=filtered.sort((a,b)=>(catOrder[a.cat]||5)-(catOrder[b.cat]||5));
-
-  currentResults={ordered,conflicts,sess,retinoidTerm,hasAnyRetinoid,removedNames};
-  renderResults(currentResults);
 }
 
 function renderResults(r){
